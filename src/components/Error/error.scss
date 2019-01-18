@@ -1,0 +1,17 @@
+@import "../../core/styles/variables";
+
+.sf-error-block {
+  padding: $sf-padding-secondary $sf-padding-primary;
+  background: #ffefe9;
+  border-radius: $sf-border-radius-primary;
+  //border: solid 1px orangered;
+  .sf-error-title {
+    font-weight: 700;
+    color: orangered;
+    margin-bottom: $sf-padding-third;
+  }
+  .sf-error-body {}
+  .sf-error-remark {
+    margin-top: $sf-padding-secondary;
+  }
+}

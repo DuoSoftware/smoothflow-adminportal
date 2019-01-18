@@ -1,0 +1,58 @@
+@import "../../core/styles/variables";
+
+.sf-tabs {
+  ul {
+    padding: 0;
+    list-style: none;
+    li.sf-tab {
+      display: inline-block;
+      margin-right: $sf-padding-primary;
+      position: relative;
+      cursor: pointer;
+      a {
+        display: inline-block;
+        padding: $sf-padding-secondary $sf-padding-primary+10;
+        border-radius: $sf-border-radius-primary;
+        background: $sf-color-primary-light;
+        color: $sf-color-primary;
+        font-weight: 600;
+        -webkit-transition: background $sf-animation-time;
+        -moz-transition: background $sf-animation-time;
+        -ms-transition: background $sf-animation-time;
+        -o-transition: background $sf-animation-time;
+        transition: background $sf-animation-time;
+      }
+      .sf-tab-active-arrow {
+        background: $sf-color-primary-light;
+        -webkit-transition: background $sf-animation-time;
+        -moz-transition: background $sf-animation-time;
+        -ms-transition: background $sf-animation-time;
+        -o-transition: background $sf-animation-time;
+        transition: background $sf-animation-time;
+      }
+
+      &.active {
+        a {
+          background: $sf-color-primary;
+          color: #ffffff;
+        }
+        .sf-tab-active-arrow {
+          position: absolute;
+          width: 10px;
+          height: 10px;
+          border-radius: 0 0 $sf-border-radius-primary - 1 0;
+          bottom: -4px;
+          left: 0;
+          right: 0;
+          margin: 0 auto;
+          background: $sf-color-primary;
+          -webkit-transform: rotate(45deg);
+          -moz-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+          -o-transform: rotate(45deg);
+          transform: rotate(45deg);
+        }
+      }
+    }
+  }
+}

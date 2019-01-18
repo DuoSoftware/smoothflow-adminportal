@@ -1,0 +1,29 @@
+@import "../../../core/styles/variables";
+
+.sf-page-header {
+  display: flex;
+  padding-bottom: $sf-padding-primary;
+  margin-bottom: $sf-padding-primary;
+  border-bottom: solid 1px $sf-shadow-color-primary;
+  .sf-page-header-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .sf-page-header-title-prefix {
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      background: $sf-color-secondary;
+      color: #fff;
+      margin-right: $sf-padding-secondary;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 40px;
+      font-size: 17px;
+      font-weight: 300;
+    }
+    h2 {
+      font-weight: 500;
+    }
+  }
+}

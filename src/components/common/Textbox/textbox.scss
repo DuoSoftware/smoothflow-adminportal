@@ -1,0 +1,18 @@
+@import "../../../core/styles/variables.scss";
+
+.sf-textbox {
+  display: flex;
+  align-items: center;
+  &.sf-textbox-center {
+    justify-content: center;
+  }
+  .sf-textbox-icon {
+    margin-right: $sf-padding-secondary;
+    color: $sf-color-primary;
+  }
+  .sf-textbox-text {
+    a {
+      text-decoration: none;
+    }
+  }
+}

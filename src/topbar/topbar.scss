@@ -1,0 +1,33 @@
+@import "../core/styles/variables";
+
+.sf-topbar {
+  position: relative;
+  z-index: 100000;
+  height: $sf-topbar-height;
+  box-shadow: 0 0 5px $sf-shadow-color-secondary;
+  .sf-block {
+    padding: $sf-padding-secondary $sf-padding-primary;
+  }
+  .sf-logo {
+    a {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      text-decoration: none;
+    }
+    img {
+      width: 180px;
+      position: relative;
+      top: -3px;
+    }
+    .sf-logo-subtext {
+      font-size: 18px;
+      //text-transform: uppercase;
+      margin-left: 10px;
+      color: #888;
+    }
+  }
+  a {
+    text-decoration: none;
+  }
+}

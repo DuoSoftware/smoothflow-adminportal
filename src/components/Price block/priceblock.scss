@@ -1,0 +1,30 @@
+@import "../../core/styles/variables";
+
+.sf-priceblock {
+  display: inline-block;
+  /* padding: 15px; */
+  border-radius: $sf-border-radius-primary;
+  background: $sf-color-bg-primary;
+  width: 250px;
+  margin: 0 $sf-padding-secondary;
+  .sf-prcblk-header {
+    padding: 15px;
+    text-align: center;
+    color: $sf-color-primary;
+  }
+  .sf-prcblk-body {
+    margin: 0 $sf-padding-primary;
+    .sf-prcblk-body-title {
+      font-weight: 600;
+      margin-bottom: $sf-padding-third;
+    }
+    .sf-prcblk-body-content {
+      padding: $sf-padding-primary;
+      background: #ffffff;
+      border-radius: $sf-border-radius-primary;
+    }
+  }
+  .sf-prcblk-footer {
+    padding: $sf-padding-primary;
+  }
+}

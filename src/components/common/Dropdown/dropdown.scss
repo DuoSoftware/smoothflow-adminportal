@@ -1,0 +1,30 @@
+@import "../../../core/styles/variables";
+
+.sf-overhead-dropdown {
+  height: 0px;
+  overflow: hidden;
+  opacity: 0;
+  background: #ffffff;
+  position: absolute;
+  z-index: -1;
+  //width: 88%;
+  border-radius: 20px;
+  top: 16px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: $sf-padding-primary;
+  box-shadow: 0 5px 10px $sf-shadow-color-primary;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in;
+  &.dark {
+    background: $sf-color-secondary;
+  }
+
+  &.opened {
+    z-index: 1;
+    opacity: 1;
+    top: 16px;
+    transition: all 0.2s ease-in;
+  }
+}
