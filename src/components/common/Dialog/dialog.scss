@@ -1,0 +1,39 @@
+@import "../../../../src/core/styles/variables.scss";
+
+.sf-dialog {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background: #ffffff;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: $sf-padding-primary + 30;
+  padding: $sf-padding-primary;
+  border-radius: $sf-border-radius-primary + 5;
+  -webkit-box-shadow: 0 5px 30px $sf-shadow-color-primary;
+  -moz-box-shadow: 0 5px 30px $sf-shadow-color-primary;
+  box-shadow: 0 5px 30px $sf-shadow-color-primary;
+  &.sf-dialog-guide {
+    height: 150px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 20px;
+    .sf-dg-header {
+      display: flex;
+      h3 {
+        flex: 1;
+      }
+      .sf-dg-header-close {
+        cursor: pointer;
+      }
+    }
+  }
+  .sf-dialog-body {
+    //position: relative;
+    flex: 1;
+    overflow-y: scroll;
+  }
+}

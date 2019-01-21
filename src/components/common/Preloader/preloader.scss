@@ -1,0 +1,125 @@
+@import "../../../core/styles/variables";
+
+.sf-preloader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    background: #fff;
+    transition: all $sf-animation-time;
+  .sf-preloader-outer {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background: linear-gradient($sf-color-primary 30%, $sf-color-primary, #fff 50%, $sf-color-secondary, $sf-color-secondary 30%);
+    position: relative;
+    .sf-preloader-inner {
+      position: absolute;
+      left: 0;right: 0;top: 0;bottom: 0;
+      margin: auto;
+      border-radius: 100%;
+      width: 30px;
+      height: 30px;
+      background: #fff;
+    }
+
+    animation: rotateLoop 2s infinite;
+  }
+
+  .sf-preloader-sidenav {
+    width: 80%;
+    height: 100%;
+    padding: $sf-padding-primary 0;
+    .elem-1 {
+      height: 40px;
+      border-radius: 23px;
+      background: #eee;
+      margin-bottom: $sf-padding-primary + 30;
+    }
+
+    .elem-2 {
+      margin-bottom: $sf-padding-primary + 30;
+      .elem-2_ {
+        display: flex;
+        span.elem-2__ {
+          width: 15px;
+          height: 15px;
+          border-radius: 100%;
+          background: #eee;
+          margin-right: $sf-padding-primary;
+        }
+        div.elem-2__ {
+          flex: 1;
+          margin-bottom: $sf-padding-primary;
+          height: 15px;
+          border-radius: 20px;
+          background: #eee;
+        }
+      }
+    }
+    .elem-3 {
+      margin-bottom: $sf-padding-primary;
+      .elem-3_ {
+        margin-bottom: $sf-padding-primary+10;
+        height: 10px;
+        border-radius: 10px;
+      }
+      .elem-3_:first-child {
+        background: #f3f3f3;
+      }
+      .elem-3_:nth-child(2) {
+        background: #f5f5f5;
+      }
+      .elem-3_:nth-child(3) {
+        background: #f7f7f7;
+      }
+      .elem-3_:nth-child(4) {
+        background: #f9f9f9;
+      }
+      .elem-3_:nth-child(5) {
+        background: #fafafa;
+      }
+    }
+  }
+
+  .sf-preloader-topbar {
+    position: absolute;
+    width: 200px;
+    right: 0;
+    display: flex;
+    align-items: center;
+    .elem-1_ {
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      border-radius: 100%;
+      background: #eee;
+      margin-right: $sf-padding-primary+10;
+    }
+    .elem-2_ {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      background: #eee;
+    }
+  }
+}
+
+@keyframes rotateLoop {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

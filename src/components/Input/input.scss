@@ -1,0 +1,305 @@
+@import "../../core/styles/variables";
+
+input,
+textarea,
+select {
+  font-family: 'Poppins';
+  font-size: 13px;
+  padding: $sf-padding-secondary;
+  border-radius: $sf-border-radius-primary;
+  border: solid 1px $sf-shadow-color-primary;
+  outline: none;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  resize: vertical;
+  background: #ffffff;
+  &.sf-input-shadow {
+    border: none;
+    box-shadow: 0 1px $sf-shadow-size-primary $sf-shadow-color-primary;
+  }
+}
+.sf-input-block {
+  margin-bottom: $sf-padding-primary;
+  &.sf-flexbox-row {
+    &>Input:not(:last-child) {
+      margin-right: $sf-padding-secondary;
+    }
+  }
+}
+label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: $sf-padding-third;
+}
+.sf-checkbox {
+  position: absolute;
+  opacity: 0;
+  display: inline-block !important;
+  width: auto !important;
+
+  &+label {
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  // Box.
+  &+label:before {
+    content: '';
+    margin-right: $sf-padding-secondary;
+    display: inline-block;
+    vertical-align: text-top;
+    width: 25px;
+    height: 25px;
+    background: white;
+    border-radius: $sf-border-radius-primary;
+    border: solid 1px $sf-shadow-color-primary;
+  }
+
+  // Box hover
+  &:hover+label:before {
+    border-color: $sf-color-primary;
+  }
+
+  // Box checked
+  &:checked+label:before {
+    border-color: $sf-color-primary;
+  }
+
+  // Disabled state label.
+  &:disabled+label {
+    color: #b8b8b8;
+    cursor: auto;
+  }
+
+  // Disabled box.
+  &:disabled+label:before {
+    box-shadow: none;
+    background: #ddd;
+  }
+
+  // Checkmark. Could be replaced with an image
+  &:checked+label:after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 12px;
+    background: $sf-color-primary;
+    width: 3px;
+    height: 3px;
+    box-shadow:
+      2px 0 0 $sf-color-primary,
+      4px 0 0 $sf-color-primary,
+      4px -2px 0 $sf-color-primary,
+      4px -4px 0 $sf-color-primary,
+      4px -6px 0 $sf-color-primary,
+      4px -8px 0 $sf-color-primary;
+    transform: rotate(45deg);
+  }
+}
+.sf-radiobox {
+  input {
+    &:checked,
+    &:not(:checked) {
+      position: absolute;
+      left: -9999px;
+    }
+    &:checked+label,
+    &:not(:checked)+label {
+      position: relative;
+      padding-left: 40px;
+      cursor: pointer;
+      line-height: 25px;
+      display: inline-block; //color: #666;
+    }
+    &:checked+label:before,
+    &:not(:checked)+label:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 22px;
+      height: 22px; //border: 2px solid #aaa;
+      border-radius: 100%;
+      background: #fff;
+      border: solid 1px $sf-color-primary;
+    }
+    &:checked+label:after,
+    &:not(:checked)+label:after {
+      content: '';
+      width: 14px;
+      height: 14px;
+      background: $sf-color-primary;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      border-radius: 100%;
+      -webkit-transition: all 0.2s ease;
+      transition: all 0.2s ease;
+    }
+    &:not(:checked)+label:after {
+      opacity: 0;
+      -webkit-transform: scale(0);
+      -webkit-transform: scale(0);
+      -moz-transform: scale(0);
+      -ms-transform: scale(0);
+      -o-transform: scale(0);
+      transform: scale(0);
+    }
+    &:checked+label:after {
+      opacity: 1;
+      -webkit-transform: scale(1);
+      -webkit-transform: scale(1);
+      -moz-transform: scale(1);
+      -ms-transform: scale(1);
+      -o-transform: scale(1);
+      transform: scale(1);
+    }
+    &:disabled+label {
+      color: $sf-text-color-secondary;
+      cursor: default;
+    }
+    &:disabled+label:after {
+      opacity: 1;
+      background: $sf-color-bg-primary;
+      -webkit-transform: scale(1);
+      -webkit-transform: scale(1);
+      -moz-transform: scale(1);
+      -ms-transform: scale(1);
+      -o-transform: scale(1);
+      transform: scale(1);
+    }
+    &:disabled+label:before {
+      opacity: 1;
+      border-color: $sf-text-color-secondary;
+    }
+  }
+}
+.sf-input-inputcontrol {
+  display: flex;
+  box-shadow: 0 1px 5px $sf-shadow-color-primary;
+  border-radius: $sf-border-radius-primary + 15;
+  width: 60%;
+  height: $sf-controls-height;
+  position: relative;
+  .sf-inputcontrol-select {
+    background: $sf-color-bg-secondary;
+    padding: $sf-padding-secondary;
+    border-radius: ($sf-border-radius-primary + 15) 0 0 ($sf-border-radius-primary + 15);
+    cursor: pointer;
+    color: $sf-text-color-secondary;
+    display: flex;
+    align-items: center;
+    i.material-icons {
+      font-size: 17px;
+      margin-right: $sf-padding-third;
+    }
+    span.sf-icon {
+      margin-left: $sf-padding-secondary;
+      font-size: 8px;
+    }
+  }
+  .sf-inputcontrol-state {
+    display: inline-block;
+    padding: 0 4px;
+    border-radius: 5px;
+    color: #fff;
+    &.state-All {
+      color: $sf-text-color-secondary;
+    }
+    &.state-PRIVATE {
+      background: $sf-private;
+    }
+    &.state-INPROGRESS {
+      background: $sf-pending;
+    }
+    &.state-PUBLISHED {
+      background: $sf-public;
+    }
+    &.state-PENDINGREVISION {
+      background: $sf-inprogress;
+    }
+    &.state-FAILED {
+      background: $sf-failed;
+    }
+  }
+  .input-dropdown {
+    padding: $sf-padding-primary;
+    top: 40px;
+    width: 200px;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    z-index: 1000;
+    background: #fff;
+    border-radius: $sf-border-radius-primary;
+    box-shadow: 0 1px 10px $sf-shadow-color-secondary;
+    transition: all 0.2s ease-in;
+    overflow-y: hidden;
+    li {
+      list-style: none;
+      cursor: pointer;
+      padding: $sf-padding-third 0;
+      span.sf-icon {
+        margin-right: $sf-padding-secondary;
+        font-size: 12px;
+        color: $sf-color-primary;
+      }
+      &:hover {
+        font-weight: 600;
+      }
+    }
+    &.input-dropdown-opened {
+      height: 200px;
+      opacity: 1;
+      top: 50px;
+      transition: all 0.2s ease-in;
+    }
+  }
+  input {
+    flex: 1;
+    border: none;
+    padding: 0 $sf-padding-secondary;
+    border-radius: 0 ($sf-border-radius-primary + 15) ($sf-border-radius-primary + 15) 0;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+select {
+  cursor: pointer;
+  width: 100%;
+  // border: none;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.sf-custom-input {
+  position: relative;
+  padding-top: 20px;
+  &.sf-custom-select:before {
+    content: '▾';
+    color: #000;
+    position: absolute;
+    height: 5px;
+    line-height: 0;
+    right: 10px;
+    top: 40px;
+    margin: auto;
+  }
+  label {
+    position: absolute;
+    top: 0px;
+    font-size: 12px;
+    font-weight: normal;
+    color: #aaa;
+  }
+}
+
+.sf-input-error {
+  border-color: $sf-failed;
+}

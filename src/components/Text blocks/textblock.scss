@@ -1,0 +1,30 @@
+@import "../../core/styles/variables";
+
+.sf-txtblock {
+  display: flex;
+  float: left;
+  margin-right: $sf-padding-primary+20;
+  &.sf-txtblock-iconed {
+    .sf-txtblock-icon {
+      align-content: center;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      .sf-icon {
+        font-size: 30px;
+        height: 30px;
+        width: 30px;
+        display: inline-block;
+        color: $sf-color-green;
+      }
+    }
+  }
+  .sf-txtblock-text {
+    padding: $sf-padding-primary;
+
+    .sf-txtblock-txt-title {
+      font-weight: 600;
+      margin-bottom: $sf-padding-third;
+    }
+  }
+}

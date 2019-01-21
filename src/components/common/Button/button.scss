@@ -1,0 +1,113 @@
+@import "../../../core/styles/variables.scss";
+
+.__button_transition {
+  -webkit-transition: background $sf-animation-time, box-sahdow $sf-animation-time;
+  -moz-transition: background $sf-animation-time, box-sahdow $sf-animation-time;
+  -ms-transition: background $sf-animation-time, box-sahdow $sf-animation-time;
+  -o-transition: background $sf-animation-time, box-sahdow $sf-animation-time;
+  transition: background $sf-animation-time, box-sahdow $sf-animation-time;
+}
+
+.sf-button {
+  font-family: Poppins;
+  display: inline-block;
+  background: #fff;
+  height: $sf-controls-height;
+  border: none;
+  padding: ($sf-padding-secondary - 2) $sf-padding-primary+10;
+  border-radius: 100px;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  text-decoration: inherit;
+  -webkit-transition: background $sf-animation-time;
+  -moz-transition: background $sf-animation-time;
+  -ms-transition: background $sf-animation-time;
+  -o-transition: background $sf-animation-time;
+  transition: background $sf-animation-time;
+  box-shadow: inset 0 0 0 2px #fff;
+  &.sf-button-primary {
+    color: #ffffff;
+    &.sf-button-primary-p {
+      background: $sf-color-primary;
+      box-shadow: inset 0 0 0 2px $sf-color-primary;
+      &:hover, &.sf-button-primary-light:hover {
+        background: $sf-color-primary-dark;
+        color: #fff;
+        @extend .__button_transition;
+      }
+    }
+    &.sf-button-primary-s {
+      background: $sf-color-secondary;
+      box-shadow: inset 0 0 0 2px $sf-color-secondary;
+      &:hover, &.sf-button-secondary-light:hover {
+        background: $sf-color-primary-dark;
+        box-shadow: inset 0 0 0 2px $sf-color-primary-dark;
+        color: #fff;
+        @extend .__button_transition;
+      }
+    }
+    &.sf-button-primary-light {
+      background: $sf-color-primary-light;
+      color: $sf-color-primary;
+    }
+  }
+  &.sf-button-secondary {
+    padding: ($sf-padding-secondary - 2) $sf-padding-primary+10;
+    background: #fff;
+    color: $sf-color-secondary;
+    box-shadow: inset 0 0 0 2px $sf-color-secondary;
+    &:hover {
+      background: $sf-color-secondary-light;
+      @extend .__button_transition;
+    }
+  }
+  &.sf-button-block {
+    width: 100%;
+    justify-content: center;
+  }
+  &.sf-button-small {
+    padding: $sf-padding-third $sf-padding-secondary;
+  }
+  &.sf-button-clear {
+    background: transparent;
+    color: $sf-color-secondary;
+    &:hover {
+      box-shadow: inset 0 0 0 2px $sf-color-secondary-light;
+      background: $sf-color-secondary-light;
+    }
+  }
+  &.sf-button-iconed {
+    display: flex;
+    align-content: center;
+    .sf-icon {
+      margin-right: $sf-padding-secondary;
+      font-size: 17px;
+    }
+  }
+  &.sf-button-circle {
+    padding: 0;
+    font-size: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    justify-content: center;
+    &.sf-button-iconed {
+      .sf-icon {
+        margin-right: 0;
+      }
+    }
+  }
+  &.sf-button-caps {
+    text-transform: uppercase;
+    word-spacing: $sf-wordspacing-secondary;
+  }
+  &:disabled {
+    cursor: inherit!important;
+    pointer-events: none!important;
+    color: $sf-text-color-secondary;
+  }
+}
+.sf-button-link {
+  height: $sf-controls-height;
+}

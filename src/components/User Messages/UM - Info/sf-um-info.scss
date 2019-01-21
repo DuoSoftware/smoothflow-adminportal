@@ -1,0 +1,13 @@
+@import "../../../core/styles/variables";
+
+.sf-um {
+  padding: $sf-padding-primary 0;
+  color: $sf-color-secondary;
+  font-size: 12px;
+  .sf-icon {
+    margin-right: 10px;
+    font-size: 15px;
+    position: relative;
+    top: 2px;
+  }
+}

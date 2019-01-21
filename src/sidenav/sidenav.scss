@@ -1,0 +1,74 @@
+@import "../core/styles/variables";
+
+.sf-sidenav {
+  position: relative;
+  display: inline-block;
+  float: left;
+  width: 279px;
+  height: 100%;
+  padding-bottom: $sf-padding-primary;
+  overflow-y: scroll;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-right: solid 1px $sf-shadow-color-primary;
+
+  .sf-user-nav {
+    .sf-list {
+      li {
+        padding: $sf-padding-third $sf-padding-primary;
+        margin: 0 (-$sf-padding-primary) ($sf-padding-primary - $sf-padding-third) (-$sf-padding-primary);
+        &.sf-list-active {
+          background: $sf-color-primary-light;
+          // border-left: solid 5px $sf-color-primary;
+          .sf-textbox-icon {
+            color: $sf-color-primary-dark;
+          }
+          .sf-textbox-text {
+            font-weight: 500;
+            color: $sf-color-primary-dark;
+          }
+        }
+      }
+    }
+    .sf-textbox-icon {
+      color: $sf-color-primary;
+    }
+    .sf-textbox-text {
+      text-transform: capitalize;
+    }
+  }
+
+  .sf-overhead-dropdown {
+    .sf-list {
+      .sf-textbox {
+        .sf-textbox-icon {
+          color: $sf-color-primary;
+        }
+        .sf-textbox-text {
+          color: #ffffff;
+        }
+
+        &:hover {
+          .sf-textbox-icon {
+            color: #ffffff;
+          }
+          .sf-textbox-text {
+            font-weight: 500;
+          }
+        }
+      }
+    }
+    &>.sf-icon {
+      position: absolute;
+      right: $sf-padding-secondary;
+      top: $sf-padding-secondary;
+      color: #aaa;
+      font-size: 16px;
+      &:hover {
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+  }
+}

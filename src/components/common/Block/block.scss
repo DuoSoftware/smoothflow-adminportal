@@ -1,0 +1,8 @@
+@import "../../../core/styles/variables.scss";
+
+.sf-block {
+  padding: $sf-padding-primary;
+  &.sf-flex {
+    display: flex;
+  }
+}

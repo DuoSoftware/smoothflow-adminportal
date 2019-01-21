@@ -1,0 +1,65 @@
+@import "./sf_fontface.css";
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-sf_ico_check_circle:before {
+    content: "\e900";
+}
+.icon-sf_ico_check_circle_thin:before {
+    content: "\e901";
+}
+.icon-sf_ico_chevron_down:before {
+    content: "\e902";
+}
+.icon-sf_ico_chevron_left:before {
+    content: "\e903";
+}
+.icon-sf_ico_chevron_right:before {
+    content: "\e904";
+}
+.icon-sf_ico_chevron_up:before {
+    content: "\e905";
+}
+.icon-sf_ico_close_circle:before {
+    content: "\e906";
+}
+.icon-sf_ico_code:before {
+    content: "\e907";
+}
+.icon-sf_ico_delete:before {
+    content: "\e908";
+}
+.icon-sf_ico_edit:before {
+    content: "\e909";
+}
+.icon-sf_ico_home:before {
+    content: "\e90a";
+}
+.icon-sf_ico_information:before {
+    content: "\e90b";
+}
+.icon-sf_ico_items:before {
+    content: "\e90c";
+}
+.icon-sf_ico_notification:before {
+    content: "\e90d";
+}
+.icon-sf_ico_plus_circle:before {
+    content: "\e90e";
+}
+.icon-sf_ico_plus_search:before {
+    content: "\e90f";
+}

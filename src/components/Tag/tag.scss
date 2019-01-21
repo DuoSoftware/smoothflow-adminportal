@@ -1,0 +1,36 @@
+@import "../../core/styles/variables";
+
+.sf-tag {
+  display: inline-block;
+  position: relative;
+  padding: $sf-padding-third 0 $sf-padding-secondary $sf-padding-third;
+  border: solid 2px $sf-shadow-color-primary;
+  border-radius: $sf-border-radius-primary 0 0 $sf-border-radius-primary;
+  border-right: none;
+  //margin: 0 -10px 0 10px;
+  margin-right: 20px;
+  font-size: 12px;
+  height: 27px;
+  box-sizing: border-box;
+  color: $sf-text-color-secondary;
+  line-height: 11px;
+  .sf-tag-arrow {
+    display: inline-block;
+    position: absolute;
+    border-top: solid 2px $sf-shadow-color-primary;
+    border-right: solid 2px $sf-shadow-color-primary;
+    height: 17px;
+    width: 17px;
+    top: 2px;
+    right: -10px;
+    border-radius: 0 $sf-border-radius-primary 0 0;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+}
+.sf-tag-block {
+  //padding: $sf-padding-primary 0;
+}
