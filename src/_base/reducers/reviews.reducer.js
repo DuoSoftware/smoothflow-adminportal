@@ -4,7 +4,7 @@ const initState = {
 const ReviewsReducer = (state = initState, action) => {
     switch (action.type) {
 
-        case 'ALL_REDUCERS' :
+        case 'ALL_REVIEWS' :
             return {
                 ...state,
                 reviews: action.reviews
@@ -13,6 +13,6 @@ const ReviewsReducer = (state = initState, action) => {
         default:
             return state
     }
-}
+};
 
 export default ReviewsReducer;

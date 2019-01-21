@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import './itemcard.scss';
 import { connect } from 'react-redux';
-import UMInfo from '../User Messages/UM - Info/info.user.message'
-import Tag from '../Tag/tag.widget'
-import TableTwoCol from '../Table - Two Col/table_two_col.widget';
-import TagBlock from '../Tag/tagblock.widget';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import {Button, Block, Textbox} from "../common";
-import Wrap from "../../_base/_wrap";
 import Moment from 'react-moment';
 
 class ItemCard extends Component {
     constructor(props) {
         super(props);
     };
+    componentDidMount() {
+    }
     render() {
         return (
             <div className="sf-item-card-wrap" {...this.props}>

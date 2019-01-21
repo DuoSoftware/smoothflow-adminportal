@@ -10,6 +10,7 @@ import Sidenav from './sidenav/sidenav.component';
 import Topbar from './topbar/topbar.component';
 import Home from './body/home.container';
 import ItemView from './body/itemview.container';
+import Reviews from './body/reviews.container';
 import PrivateRoute from './_base/_private.route';
 import URLs from "./_base/_urls";
 import {User, PreloadShell, SignIn} from './_base/actions';
@@ -66,6 +67,7 @@ class App extends Component {
                                         classNames='sf-fade'>
                                         <Switch location={location}>
                                             <Route exact path="/" component={Home} />
+                                            <Route exact path="/user/all_reviews" component={Reviews} />
                                             <Route path="/reviews/:id" component={ItemView} />
 \                                            <PrivateRoute exact path="/user/reviews" is_logged_in={this.props.user.is_logged_in} component={MyReviews} />
                                         </Switch>

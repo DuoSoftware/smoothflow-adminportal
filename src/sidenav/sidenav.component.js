@@ -13,10 +13,12 @@ class Sidenav extends Component {
         this.state = {
             _sidenav : [{
                 name: 'All reviews',
+                url: 'all_reviews',
                 icon: 'code',
                 active: false
             }, {
                 name: 'My Reviews',
+                url: 'my_reviews',
                 icon: 'code',
                 active: false
             }],
@@ -88,7 +90,7 @@ class Sidenav extends Component {
                                                         {
                                                             this.state._sidenav.map(nav => {
                                                                 return  <li key={KEY()} className={nav.active ? 'sf-list-active' : null}>
-                                                                    <Link to={'/user/' + nav.name}
+                                                                    <Link to={'/user/' + nav.url}
                                                                           onClick={event => this.setActiveNav(event, nav.name)}
                                                                           id={`NAV_${nav.name.toUpperCase()}`}>
                                                                         <Textbox icon={nav.icon} size="17">

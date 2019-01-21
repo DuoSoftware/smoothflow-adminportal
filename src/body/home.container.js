@@ -34,17 +34,19 @@ class Home extends Component {
         };
     }
     componentDidMount() {
-        this.getAllItems();
     }
 
     temp_all_activities = [];
     // -------------------------------------------------------------------------------
     getAllItems = () => {
+        this.setState(state => ({
+            ...state,
+            loading: true
+        }));
         ReviewsService.getAllReviews()
             .then(reviews => {
                 if (reviews.status) {
                     const _reviews = reviews.data.Result.map(review => {
-                        debugger
                         return {
                             ...review,
                             original: review,
