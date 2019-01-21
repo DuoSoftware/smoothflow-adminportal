@@ -49,53 +49,10 @@ class Home extends Component {
                             ...review,
                             original: review,
                             type: 'review',
-                            state: review.state,
+                            state: review.review_status,
                             name: review.activity_name,
                             image: review.image,
                             description: review.description,
-                            features:
-                                review.features.map((ft) => {
-                                    return {
-                                        title: ft.title,
-                                        icon: 'check_circle',
-                                        description: ft.description
-                                    }
-                                }),
-                            tags:
-                                review.tags.map((tag) => {
-                                    return {
-                                        name: tag.tag
-                                    }
-                                }),
-                            what_you_get:
-                                review.what_you_get.map((wyg) => {
-                                    return {
-                                        type: 'image',
-                                        file: wyg.file
-                                    }
-                                }),
-                            pricings:
-                                review.pricings.map((price) => {
-                                    return {
-                                        name: price.name,
-                                        pricing_fts:
-                                            price.pricing_fts.map((ft) => {
-                                                return {
-                                                    icon: 'check_circle_thin',
-                                                    text: ft
-                                                }
-                                            }),
-                                        price: price.price,
-                                        bill_cycle: price.bill_cycle
-                                    }
-                                }),
-                            faq:
-                                review.faq.map((fq) => {
-                                    return  {
-                                        question: fq.question,
-                                        answer: fq.answer
-                                    }
-                                }),
                             variables:
                                 review.variables.map((v) => {
                                     return  {
