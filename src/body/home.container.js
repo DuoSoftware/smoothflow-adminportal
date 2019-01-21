@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Route, Link, Redirect } from "react-router-dom";
-import {Activities, ActivitiesLoader, ALlReviews} from '../_base/actions'
-import {ActivitiesService, KEY, ReviewsService} from '../_base/services';
+import { PreloadBody } from '../_base/actions'
 import ItemCard from '../components/Itemcard/itemcard.widget';
 import Wrap from '../_base/_wrap'
-import {Button, Preloader, PageHeader} from '../components/common';
+import { Preloader, PageHeader } from '../components/common';
+import {ReviewsService} from "../_base/services";
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: false,
+            allActivities: [],
+            loadingPage: false,
             filter: {
                 categories: [
                     {
@@ -19,31 +20,43 @@ class Home extends Component {
                         selected: true
                     },
                     {
-                        text: 'PRIVATE',
+                        text: 'INQUEUE',
                         selected: false
                     },
                     {
-                        text: 'PUBLISHED',
+                        text: 'PENDINGREVISION',
+                        selected: false
+                    },
+                    {
+                        text: 'INPROGRESS',
+                        selected: false
+                    },
+                    {
+                        text: 'PASSED',
+                        selected: false
+                    },
+                    {
+                        text: 'FAILED',
                         selected: false
                     }
                 ],
                 toggleDropdown: false
-            },
-            filtered: [],
-            temp_filtered: []
+            }
         };
     }
     componentDidMount() {
         this.getAllItems();
     }
 
-    temp_all_activities = [];
     // -------------------------------------------------------------------------------
+    temp_all_activities = [];
+
     getAllItems = () => {
+        this.props.dispatch(PreloadBody(true));
         ReviewsService.getAllReviews()
-            .then(reviews => {
-                if (reviews.status) {
-                    const _reviews = reviews.data.Result.map(activity => {
+            .then(res => {
+                if(res.data.IsSuccess) {
+                    const _queue = res.data.Result.map(activity => {
                         return {
                             name: activity.activity_name,
                             description: activity.description,
@@ -56,31 +69,29 @@ class Home extends Component {
                             _id: activity._id,
                         }
                     });
-                    this.props.dispatch(ALlReviews(_reviews));
                     this.setState(state => ({
                         ...state,
-                        loading: false,
-                        filtered: _reviews,
-                        temp_filtered: _reviews
+                        allActivities: _queue
                     }));
+                    this.props.dispatch(PreloadBody(false));
                 }
             })
-            .catch(error => {
+            .catch(errorres => {
                 debugger
             });
     };
-    // -------------------------------------------------------------------------------
 
     // Search
     search = (e) => {
-        const _filtered = this.temp_all_activities.filter((review) => {
-            return review.name.toLowerCase().includes(e.target.value.toLowerCase());
+        const _filtered = this.temp_all_activities.filter((activity) => {
+            return activity.name.toLowerCase().includes(e.target.value.toLowerCase());
         });
         this.setState(prevState => ({
             ...prevState,
             allActivities: _filtered
         }));
     };
+
     openSearchDropdown = (e) => {
         const handler = !this.state.filter.toggleDropdown;
         this.setState(prevState => ({
@@ -146,7 +157,7 @@ class Home extends Component {
                             <div>
                                 {
                                     !this.props.uihelper._preload_body_
-                                        ?   this.state.filtered.map((activity) => {
+                                        ?   this.state.allActivities.map((activity) => {
                                             if(activity) return <ItemCard item={activity} key={activity._id} />
                                         })
                                         :   null
@@ -161,7 +172,6 @@ class Home extends Component {
 
 const mapStateToProps = state => ({
     user: state.user,
-    reviews: state.reviews,
     uihelper: state.uihelper
 });
 
