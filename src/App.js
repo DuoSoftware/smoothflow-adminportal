@@ -68,7 +68,7 @@ class App extends Component {
                                         <Switch location={location}>
                                             <Route exact path="/" component={Home} />
                                             <Route exact path="/user/all_reviews" component={Reviews} />
-                                            <Route path="/reviews/:id" component={ItemView} />
+                                            <Route path="/user/activity/:id" component={ItemView} />
 \                                            <PrivateRoute exact path="/user/reviews" is_logged_in={this.props.user.is_logged_in} component={MyReviews} />
                                         </Switch>
                                     </CSSTransition>

@@ -14,10 +14,10 @@ class ItemCard extends Component {
     render() {
         return (
             <div className="sf-item-card-wrap" {...this.props}>
-                <Link to={{ pathname: '/activity/' + this.props.item._id , activity: {...this.props.item}, advanced: true }} className={`sf-item-card sf-border-box sf-item-card-clickable${ this.props.className ? ' ' + this.props.className : null}`}>
+                <Link to={{ pathname: '/user/activity/' + this.props.item.activity_name , activity: {...this.props.item}, advanced: true }} className={`sf-item-card sf-border-box sf-item-card-clickable${ this.props.className ? ' ' + this.props.className : null}`}>
                     <div className="sf-item-card-header bordered">
                         <h3>{ this.props.item.name }</h3>
-                        <span className="sf-activity-state">{ this.props.item.state }</span>
+                        <span className="sf-activity-state">{ this.props.item.review_status }</span>
                     </div>
                     <div className="sf-item-card-body">
                         <div className="sf-image-text-container" style={{overflow:'hidden'}}>

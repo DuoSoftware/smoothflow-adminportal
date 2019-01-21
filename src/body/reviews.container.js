@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Route, Link, Redirect } from "react-router-dom";
-import {PageHeader, Preloader} from "../components/common";
+import {Button, PageHeader, Preloader} from "../components/common";
 import ItemCard from '../components/Itemcard/itemcard.widget';
 import {ReviewsService} from "../_base/services";
 import {ALlReviews} from "../_base/actions";
@@ -29,6 +29,7 @@ class Reviews extends Component {
                 ],
                 toggleDropdown: false
             },
+            all_reviews: [],
             filtered: [],
             temp_filtered: []
         };
@@ -85,6 +86,7 @@ class Reviews extends Component {
                     this.setState(state => ({
                         ...state,
                         loading: false,
+                        all_reviews: _reviews,
                         filtered: _reviews,
                         temp_filtered: _reviews
                     }));
@@ -99,7 +101,7 @@ class Reviews extends Component {
 
     // Search
     search = (e) => {
-        const _filtered = this.temp_all_activities.filter((review) => {
+        const _filtered = this.temp_filtered.filter((review) => {
             return review.name.toLowerCase().includes(e.target.value.toLowerCase());
         });
         this.setState(prevState => ({
@@ -143,8 +145,37 @@ class Reviews extends Component {
                     this.state.loading
                         ?   <Preloader type={'BODY'} />
                         :   <Wrap>
+                            <PageHeader title={'All Activities'}>
+                                <div className="sf-input-inputcontrol sf-flex-1 sf-m-p-r">
+                                    <div className="sf-inputcontrol-select" onClick={ (event) => this.openSearchDropdown(event) }>
+                                        <i className="material-icons">search</i>
+                                        {
+                                            this.state.filter.categories.map((c) => {
+                                                if(c.selected) return <span className={`sf-inputcontrol-state state-${c.text}`} key={c.text}>{ c.text }</span>
+                                            })
+                                        }
+                                        <span className="sf-icon icon-sf_ico_chevron_down"></span>
+                                    </div>
+                                    <div className={`input-dropdown ${this.state.filter.toggleDropdown ? ' input-dropdown-opened' : ''}`}>
+                                        {
+                                            this.state.filter.categories.map((c) => {
+                                                return  <li onClick={ (e) => this.updatedFilter(e, c.text) } key={c.text}>
+                                                            <span className="sf-list-icon">
+                                                                { c.selected ? <span className="sf-icon icon-sf_ico_check_circle"></span> : null }
+                                                            </span>
+                                                    <span className={`sf-inputcontrol-state state-${c.text}`}>{ c.text }</span>
+                                                </li>
+                                            })
+                                        }
+                                    </div>
+                                    <input type="text" id="mainSearch" placeholder="Search.." onChange={ (e) => this.search(e) }/>
+                                </div>
+                                <Link to={'/user/activities/create'} className="sf-button-link">
+                                    <Button className="sf-button sf-button-primary sf-button-primary-p sf-button-raised">Create</Button>
+                                </Link>
+                            </PageHeader>
                             {
-                                this.props.reviews.reviews.map((review) => {
+                                this.state.filtered.map((review) => {
                                     return <ItemCard item={review} />
                                 })
                             }
