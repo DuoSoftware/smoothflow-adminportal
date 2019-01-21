@@ -43,83 +43,17 @@ class Home extends Component {
         ReviewsService.getAllReviews()
             .then(reviews => {
                 if (reviews.status) {
-                    const _reviews = reviews.data.Result.map(review => {
-                        debugger
+                    const _reviews = reviews.data.Result.map(activity => {
                         return {
-                            ...review,
-                            original: review,
-                            type: 'review',
-                            state: review.state,
-                            name: review.activity_name,
-                            image: review.image,
-                            description: review.description,
-                            features:
-                                review.features.map((ft) => {
-                                    return {
-                                        title: ft.title,
-                                        icon: 'check_circle',
-                                        description: ft.description
-                                    }
-                                }),
-                            tags:
-                                review.tags.map((tag) => {
-                                    return {
-                                        name: tag.tag
-                                    }
-                                }),
-                            what_you_get:
-                                review.what_you_get.map((wyg) => {
-                                    return {
-                                        type: 'image',
-                                        file: wyg.file
-                                    }
-                                }),
-                            pricings:
-                                review.pricings.map((price) => {
-                                    return {
-                                        name: price.name,
-                                        pricing_fts:
-                                            price.pricing_fts.map((ft) => {
-                                                return {
-                                                    icon: 'check_circle_thin',
-                                                    text: ft
-                                                }
-                                            }),
-                                        price: price.price,
-                                        bill_cycle: price.bill_cycle
-                                    }
-                                }),
-                            faq:
-                                review.faq.map((fq) => {
-                                    return  {
-                                        question: fq.question,
-                                        answer: fq.answer
-                                    }
-                                }),
-                            variables:
-                                review.variables.map((v) => {
-                                    return  {
-                                        "Key": v.Key,
-                                        "DisplayName": v.DisplayName,
-                                        "Value": v.Value,
-                                        "ValueList": v.ValueList.map(vl => {
-                                            return {
-                                                "key": vl.key,
-                                                "value": vl.value
-                                            }
-                                        }),
-                                        "APIMethod": v.APIMethod,
-                                        "Type": v.Type,
-                                        "Category": v.Category,
-                                        "DataType": v.DataType,
-                                        "Group": v.Group,
-                                        "Priority": v.Priority,
-                                        "advance": v.advance,
-                                        "control": v.control,
-                                        "placeholder": v.placeholder
-                                    }
-                                }),
-                            reviews: []
+                            name: activity.activity_name,
+                            description: activity.description,
+                            created_date: activity.created_at,
+                            company: activity.company,
+                            tenant: activity.tenant,
+                            tenant_name: activity.tenant_name,
+                            state: activity.review_status,
+                            reviewer_comments: activity.reviewer_comments,
+                            _id: activity._id,
                         }
                     });
                     this.props.dispatch(ALlReviews(_reviews));
