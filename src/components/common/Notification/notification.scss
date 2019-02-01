@@ -1,0 +1,41 @@
+@import "../../../core/styles/variables";
+
+.sf-notification {
+  padding: $sf-padding-secondary;
+  border-radius: $sf-border-radius-primary;
+  display: flex;
+  align-items: center;
+  background: $sf-highlighter-gray-light;
+  margin-bottom: $sf-padding-primary;
+  .sf-notification-prefix {
+    display: flex;
+    width: $sf-button-height + 10;
+    height: $sf-button-height + 10;
+    background: $sf-color-primary-dark;
+    border-radius: $sf-border-radius-primary;
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 500;
+    align-items: center;
+    justify-content: center;
+  }
+  .sf-notification-body {
+    flex: 1;
+    padding: 0 $sf-padding-third 0 $sf-padding-secondary;
+    .sf-notification-title {
+      font-weight: 500;
+      margin-bottom: $sf-padding-secondary;
+    }
+    .sf-notification-desc {
+      p {
+        margin: 0;
+        overflow: hidden;
+      }
+    }
+  }
+  &:hover {
+    //box-shadow: 0 1px $sf-shadow-size-secondary $sf-color-shadow-secondary;
+    background: $sf-highlighter-gray;
+    cursor: pointer;
+  }
+}

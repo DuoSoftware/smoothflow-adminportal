@@ -1,34 +1,106 @@
 @import "../core/styles/variables";
 
-.sf-topbar {
-  position: relative;
-  z-index: 100000;
+.sf-tf-topbar {
+  display: flex;
+  justify-content: start;
   height: $sf-topbar-height;
-  box-shadow: 0 0 5px $sf-shadow-color-secondary;
-  .sf-block {
-    padding: $sf-padding-secondary $sf-padding-primary;
-  }
-  .sf-logo {
-    a {
+  border-bottom: solid 1px $sf-color-shadow-primary;
+  padding: 0 $sf-padding-primary;
+  position: relative;
+  //background: $sf-highlighter-gray-light;
+
+  .sf-tf-topbar-brand {
+    padding: $sf-padding-secondary 0;
+    //flex: 1;
+    width: $sf-brand-width;
+    .sf-tf-topbar-logo {
       display: flex;
-      flex-direction: row;
       align-items: center;
-      text-decoration: none;
-    }
-    img {
-      width: 170px;
-      position: relative;
-      top: -1px;
-    }
-    .sf-logo-subtext {
-      font-size: 14px;
-      line-height: 10px;
-      text-transform: uppercase;
-      margin: 7px 0 0 10px;
-      color: #888;
+      .sf-tf-topbar-logo-text {
+        display: inline-block;
+        margin-left: $sf-padding-third;
+        margin-top: $sf-padding-third;
+        color: $sf-color-txt-secondary;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      img {
+        width: 150px;
+      }
     }
   }
-  a {
-    text-decoration: none;
+  .sf-tf-topbar-tools {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: $sf-brand-width;
+    .sf-tf-topbar-tool {
+      position: relative;
+      width: $sf-button-height;
+      min-width: $sf-button-height;
+      height: $sf-button-height;
+      margin-left: $sf-padding-primary;
+      &.sf-topbar-textimg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: $sf-color-primary;
+        background: $sf-highlighter-gray;
+        border-radius: 100%;
+        cursor: pointer;
+      }
+      &.sf-tf-topbar-tool-selected {
+
+        padding: $sf-padding-secondary;
+        //margin: -$sf-padding-secondary + 2;
+        border-radius: 20px 20px 0 0;
+        box-shadow: 0 -3px 5px #ddd;
+        height: 45px;
+        margin-top: $sf-padding-third + 2;
+        //margin-bottom: $sf-padding-secondary;
+        background: #ffffff;
+      }
+      .sf-notif-indecator {
+        width: 8px;
+        height: 8px;
+        border-radius: 100%;
+        background: red;
+        display: inline-block;
+        position: absolute;
+        top: 7px;
+        right: 7px;
+        border: solid 2px #fff;
+      }
+    }
+  }
+  .sf-tf-topbar-username {
+    margin-left: $sf-padding-secondary;
+  }
+  .sf-topbar-btngrp-wrap {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    align-items: flex-end;
+    justify-content: center;
+    button {
+      padding: 10px 20px;
+      position: relative;
+      bottom: -1px;
+      border-radius: 10px 10px 0 0;
+      cursor: pointer;
+      border-width: 0;
+      background: $sf-highlighter-gray-light;
+      border-width: 1px 1px 0 1px;
+
+    }
+  }
+  .sf-overhead-dropdown {
+    width: 200px;
+    left: auto;
+    z-index: 100000;
+    padding: 0 $sf-padding-primary;
   }
 }

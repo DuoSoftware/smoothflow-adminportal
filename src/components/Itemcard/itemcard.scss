@@ -30,24 +30,30 @@
         margin: 0;
         font-size: $sf-header-sub;
       }
-      .sf-activity-state {
-        display: inline-block;
-        padding: $sf-padding-third - 3 $sf-padding-third;
-        border-radius: $sf-border-radius-primary;
-        color: #ffffff;
-        &.sf-activity-private {
-          background: $sf-private;
-        }
-        &.sf-activity-published {
-          background: $sf-public;
-        }
-        &.sf-activity-pending {
-          background: $sf-pending;
-        }
-        &.sf-activity-public {
-          background: $sf-public;
-        }
-      }
+      //.sf-activity-state {
+      //  display: inline-block;
+      //  padding: $sf-padding-third - 3 $sf-padding-third;
+      //  border-radius: $sf-border-radius-primary;
+      //  color: #ffffff;
+      //  &.sf-activity-inqueue {
+      //    background: $sf-private;
+      //  }
+      //  &.sf-activity-passed {
+      //    background: $sf-public;
+      //  }
+      //  &.sf-activity-inprogress {
+      //    background: $sf-pending;
+      //  }
+      //  &.sf-activity-pendingrevision {
+      //    background: $sf-pending;
+      //  }
+      //  &.sf-activity-public {
+      //    background: $sf-public;
+      //  }
+      //  &.sf-activity-failed {
+      //    background: $sf-failed;
+      //  }
+      //}
     }
     .sf-item-card-body {
       padding: $sf-padding-primary;
@@ -81,5 +87,29 @@
     &.sf-item-card-fixed {
       height: 445px;
     }
+  }
+}
+.sf-activity-state {
+  display: inline-block;
+  padding: $sf-padding-third - 3 $sf-padding-third;
+  border-radius: $sf-border-radius-primary;
+  color: #ffffff;
+  &.sf-activity-inqueue {
+    background: $sf-private;
+  }
+  &.sf-activity-passed {
+    background: $sf-public;
+  }
+  &.sf-activity-inprogress {
+    background: $sf-pending;
+  }
+  &.sf-activity-pendingrevision {
+    background: $sf-pending;
+  }
+  &.sf-activity-public {
+    background: $sf-public;
+  }
+  &.sf-activity-failed {
+    background: $sf-failed;
   }
 }

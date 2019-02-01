@@ -1,6 +1,7 @@
 @import "./core/styles/variables";
 @import "./core/icons/icons.css";
 @import '../node_modules/react-redux-toastr/src/styles/index';
+@import '../node_modules/react-quill/dist/quill.snow.css';
 
 body,
 html,
@@ -132,7 +133,8 @@ a {
 
 //-   -   -   -   -   -   -   -   -   -   -
 .sf-body-container {
-  height: calc(100% - #{$sf-topbar-height});
+  position: relative;
+  height: calc(100% - #{$sf-topbar-height + 1});
 }
 .sf-body {
   position: relative;
@@ -360,6 +362,36 @@ a {
 //    border-radius: 100%;
 //  }
 //}
+
+.sf-notifications {
+  width: 0;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  box-sizing: border-box;
+  padding: 0;
+  background: #ffffff;
+  -webkit-box-shadow: -3px 0 $sf-shadow-size-secondary $sf-color-shadow-primary;
+  -moz-box-shadow: -3px 0 $sf-shadow-size-secondary $sf-color-shadow-primary;
+  box-shadow: -3px 0 $sf-shadow-size-primary $sf-color-shadow-primary;
+  z-index: 10 ;
+  -webkit-transition: all $sf-animation-time;
+  -moz-transition: all $sf-animation-time;
+  -ms-transition: all $sf-animation-time;
+  -o-transition: all $sf-animation-time;
+  transition: all $sf-animation-time;
+
+  &.sf-notifications-opened {
+    width: $sf-sidenav-width-expanded + 100;
+    padding: $sf-padding-primary;
+    -webkit-transition: all $sf-animation-time;
+    -moz-transition: all $sf-animation-time;
+    -ms-transition: all $sf-animation-time;
+    -o-transition: all $sf-animation-time;
+    transition: all $sf-animation-time;
+  }
+}
 
 //Table
 .sf-table {
@@ -618,6 +650,61 @@ form {
   //  margin-right: $sf-padding-third;
   //  background: $sf-color-bg-secondary;
   //}
+}
+
+.sf-comment-block {
+  //padding: 0 $sf-padding-secondary;
+  margin-bottom: $sf-padding-primary;
+  display: flex;
+  &.sf-comment-failed {
+    .sf-comment-block-prefix {
+      background: $sf-failed;
+    }
+  }
+  &.sf-comment-passed {
+    .sf-comment-block-prefix {
+      background: $sf-public;
+    }
+  }
+  .sf-comment-block-prefix {
+    padding: $sf-padding-secondary;
+    border-radius: $sf-border-radius-primary 0 0 $sf-border-radius-primary;
+    //background: red;
+    color: #ffffff;
+  }
+  .sf-comment-block-body {
+    flex: 1;
+    border: solid 1px #eeeeee;
+    border-radius: 0 $sf-border-radius-primary $sf-border-radius-primary 0;
+    h4 {
+      display: flex;
+      padding: $sf-padding-secondary;
+      align-items: center;
+      font-weight: 500;
+      .material-icons {
+        font-size: 25px;
+        color: #dddddd;
+        margin-right: $sf-padding-third;
+      }
+    }
+    .sf-comment-content {
+      padding: $sf-padding-secondary;
+      margin: 0;
+      color: $sf-text-color-secondary;
+    }
+  }
+}
+
+.quill {
+  border-radius: $sf-border-radius-primary;
+  box-shadow: 0 1px $sf-shadow-size-secondary $sf-shadow-color-primary;
+  .ql-toolbar.ql-snow,
+  .ql-container.ql-snow {
+    border: none;
+  }
+  .ql-editor {
+    padding: $sf-padding-primary * 2;
+  }
 }
 
 

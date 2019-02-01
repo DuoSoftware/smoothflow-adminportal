@@ -2,6 +2,7 @@ const uihelper = {
     _preload_shell_ : false,
     _preload_body_ : false,
     _preload_dialog_ : false,
+    _preload_notif_ : false,
     candidate_item : {}
 };
 
@@ -29,6 +30,12 @@ const UIHelperReducer = (state = uihelper, action) => {
             return {
                 ...state,
                 candidate_int : action.item
+            };
+
+        case 'PRELOAD_NOTIFICATIONS' :
+            return {
+                ...state,
+                '_preload_notif_' : action.loader
             };
 
         default :

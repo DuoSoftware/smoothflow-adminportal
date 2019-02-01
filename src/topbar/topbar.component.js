@@ -9,6 +9,7 @@ import URLs from "../_base/_urls";
 import Auth from '../_base/_auth.redirect';
 import Wrap from "../_base/_wrap";
 import {Dropdown} from "../components/common/Dropdown/dropdown.component";
+import {OpenNotifications} from "../_base/actions";
 
 class Topbar extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ class Topbar extends Component {
 
     localSignIn = () => {
         // LOCAL dev authentication ---------------------------//
-        localStorage.setItem('satellizer_token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkdWtlLmFoYWFuQHBsdXRvY293LmNvbSIsImp0aSI6IjNkZjdkNjcyLWY0NjAtNDI2Ni04NjFkLWM2NTFiZDBhYjg5OCIsInN1YiI6IkFjY2VzcyBjbGllbnQiLCJleHAiOjE1NDg2NTE4MjksInRlbmFudCI6MSwiY29tcGFueSI6MjYyLCJjb21wYW55TmFtZSI6IkR1a2UiLCJjb250ZXh0Ijp7fSwic2NvcGUiOlt7InJlc291cmNlIjoibXlOYXZpZ2F0aW9uIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJteVVzZXJQcm9maWxlIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJhdHRyaWJ1dGUiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoiZ3JvdXAiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicmVzb3VyY2V0YXNrYXR0cmlidXRlIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6InRhc2siLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicHJvZHVjdGl2aXR5IiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6IlNoYXJlZCIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJ0YXNraW5mbyIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJhcmRzcmVzb3VyY2UiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoiYXJkc3JlcXVlc3QiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicmVxdWVzdG1ldGEiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicXVldWUiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicmVxdWVzdHNlcnZlciIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJzaXB1c2VyIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6InVzZXIiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoidXNlclByb2ZpbGUiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoib3JnYW5pc2F0aW9uIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiXX0seyJyZXNvdXJjZSI6InJlc291cmNlIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJwYWNrYWdlIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJjb25zb2xlIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJ1c2VyU2NvcGUiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoidXNlckFwcFNjb3BlIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6InVzZXJNZXRhIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6InVzZXJBcHBNZXRhIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6ImNsaWVudCIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJjbGllbnRTY29wZSIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJ3YWxsZXQiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfV0sImlhdCI6MTU0ODA0NzAyOX0.jkDjdkHCyIb0DMf_hzwwVqLh_LUFky1A5hCQ40FKYy4');
+        localStorage.setItem('satellizer_token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrYXN1bi53QGR1b3NvZnR3YXJlLmNvbSIsImp0aSI6Ijg3ZjhlNGI3LTU0ZWItNGYyZi1iOTU2LTc1ZjQ5YTVmNTAwZCIsInN1YiI6IkFjY2VzcyBjbGllbnQiLCJleHAiOjE1NDkwODg2ODcsInRlbmFudCI6MSwiY29tcGFueSI6NDEsImNvbXBhbnlOYW1lIjoia2FzdW4iLCJjb250ZXh0Ijp7fSwic2NvcGUiOlt7InJlc291cmNlIjoibXlOYXZpZ2F0aW9uIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJteVVzZXJQcm9maWxlIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJhdHRyaWJ1dGUiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoiZ3JvdXAiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicmVzb3VyY2V0YXNrYXR0cmlidXRlIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6InRhc2siLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicHJvZHVjdGl2aXR5IiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6IlNoYXJlZCIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJ0YXNraW5mbyIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJhcmRzcmVzb3VyY2UiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoiYXJkc3JlcXVlc3QiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicmVxdWVzdG1ldGEiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicXVldWUiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoicmVxdWVzdHNlcnZlciIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJzaXB1c2VyIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6InVzZXIiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoidXNlclByb2ZpbGUiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoib3JnYW5pc2F0aW9uIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiXX0seyJyZXNvdXJjZSI6InJlc291cmNlIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJwYWNrYWdlIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJjb25zb2xlIiwiYWN0aW9ucyI6WyJyZWFkIl19LHsicmVzb3VyY2UiOiJ1c2VyU2NvcGUiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfSx7InJlc291cmNlIjoidXNlckFwcFNjb3BlIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6InVzZXJNZXRhIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6InVzZXJBcHBNZXRhIiwiYWN0aW9ucyI6WyJyZWFkIiwid3JpdGUiLCJkZWxldGUiXX0seyJyZXNvdXJjZSI6ImNsaWVudCIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJjbGllbnRTY29wZSIsImFjdGlvbnMiOlsicmVhZCIsIndyaXRlIiwiZGVsZXRlIl19LHsicmVzb3VyY2UiOiJ3YWxsZXQiLCJhY3Rpb25zIjpbInJlYWQiLCJ3cml0ZSIsImRlbGV0ZSJdfV0sImlhdCI6MTU0ODQ4Mzg4N30.QIgtiHZR4JtLWlnqiCqHZfjNq79leKogxqPGbolIgmA');
         // END - LOCAL dev authentication ---------------------//
         return <Auth url={URLs.auth.signup} _rollback_point={window.location.href} />
     };
@@ -55,6 +56,17 @@ class Topbar extends Component {
         }
     };
 
+    openNotifications = (e) => {
+        debugger
+        const isopen = this.props.notifications.notifications_open;
+        if (isopen) {
+            this.props.dispatch(OpenNotifications(false));
+        } else {
+            this.props.dispatch(OpenNotifications(true));
+
+        }
+    };
+
     // if ($rootScope.isNullOrEmptyOrUndefined($scope.dashboardData.settings.defaultImage)) {
     //     var image = $scope.profileImageOptions[1];
     //     delete image.$$hashKey;
@@ -68,61 +80,58 @@ class Topbar extends Component {
 
     render() {
         return (
-            <div className="sf-topbar">
-                <Block style={{padding: '10px 15px'}}>
-                    <div className="sf-flexbox-row">
-                        <div className="sf-logo sf-flex-1">
-                            <div className="sf-flexbox-row">
-                                <Link to={'/'}>
-                                    <img src="https://dev.smoothflow.io/images/logo-smoothflow-beta-purple.svg" alt="Smoothflow Marketplace"/> <span className="sf-logo-subtext">Admin Portal</span>
-                                </Link>
-                            </div>
-                        </div>
-                        <div className="sf-flexbox-row sf-flex-center" style={{position: 'relative'}}>
-                            {
-                                this.props.uihelper._preload_shell_
-                                ?   <Preloader type={'SHELL:TOPBAR'} />
-                                :   <Wrap>
-                                        {
-                                            this.props.user.is_logged_in
-                                            ?   <Wrap>
-                                                    <span>{ this.props.user.username }</span>
-                                                    <Button
-                                                        className="sf-button sf-button-clear sf-button-circle"
-                                                        onClick={this.toggleUserCtrlPanel.bind(null, 'TOGGLE')}><span
-                                                        className={`sf-icon icon-sf_ico_${this.state.userctrl.togglePanel ? 'chevron_up' : 'chevron_down'}`}></span>
-                                                    </Button>
-                                                    <Dropdown toggle={this.state.userctrl.togglePanel} openPos={50} closedPos={16} height={'auto'}>
-                                                        <List>
-                                                            {/*<li onClick={ (e)=>this.toggleUserCtrlPanel(e, 'MYPROFILE')}>*/}
-                                                                {/*<Textbox icon={'home'}>My Profile</Textbox>*/}
-                                                            {/*</li>*/}
-                                                            {/*<li>*/}
-                                                                {/*<hr style={{opacity: 0.2}}/>*/}
-                                                            {/*</li>*/}
-                                                            <li onClick={ this.toggleUserCtrlPanel.bind(null, 'LOGOUT')}>
-                                                                <Textbox icon={'home'}>Log out</Textbox>
-                                                            </li>
-                                                        </List>
-                                                    </Dropdown>
-                                                </Wrap>
-                                            :   <div>
-                                                    <Button
-                                                        className="sf-button sf-button-secondary sf-button-small sf-button-clear sf-button-caps"
-                                                        style={{'marginRight':'10px'}}
-                                                        onClick={()=> this.localSignIn()}
-                                                    >Sign In</Button>
-                                                    <Button
-                                                        className="sf-button sf-button-secondary sf-button-small sf-button-clear sf-button-caps"
-                                                        onClick={()=> this.signUp()}
-                                                    >Sign Up</Button>
-                                                </div>
-                                        }
-                                    </Wrap>
-                            }
-                        </div>
+            <div className="sf-tf-topbar">
+                <div className="sf-tf-topbar-brand">
+                    <div className="sf-tf-topbar-logo">
+                        <img src="https://smoothflow.io/images/logo-smoothflow-beta-purple.svg" alt=""/> <span
+                        className="sf-tf-topbar-logo-text">Admin Portal</span>
                     </div>
-                </Block>
+                </div>
+                <div className="sf-topbar-btngrp-wrap">
+
+                </div>
+                <div className="sf-tf-topbar-tools">
+                    {
+                        this.props.uihelper._preload_shell_
+                            ?   <Preloader type={'SHELL:TOPBAR'}/>
+                            :   <Wrap>
+                                {
+                                    this.props.user.is_logged_in
+                                        ?   <Wrap>
+                                                <button className={`sf-tf-topbar-tool sf-button sf-button-circle${this.props.notifications.notifications_open ? ' sf-tf-topbar-tool-selected' : ''}`} onClick={ (e)=> this.openNotifications(e) }>
+                                                    { this.props.notifications.notifications.length ? <span className="sf-notif-indecator"></span> : null }
+                                                    <span className="sf-icon icon-sf_ico_notification"></span>
+                                                </button>
+                                                <div className="sf-tf-topbar-tool sf-topbar-textimg" onClick={this.toggleUserCtrlPanel.bind(null, 'TOGGLE')}>
+                                                    <span>{ this.props.user.email.contact.split('')[0] }</span>
+                                                </div>
+                                            </Wrap>
+                                        :   <div>
+                                                <Button
+                                                    className="sf-button sf-button-secondary sf-button-small sf-button-clear sf-button-caps"
+                                                    style={{'marginRight': '10px'}}
+                                                    onClick={(e) => this.localSignIn(e)}
+                                                >Sign In</Button>
+                                                <Button
+                                                    className="sf-button sf-button-secondary sf-button-small sf-button-clear sf-button-caps"
+                                                    onClick={(e) => this.signUp(e)}
+                                                >Sign Up</Button>
+                                            </div>
+                                }
+                            </Wrap>
+                    }
+                </div>
+                {
+                    this.props.user.is_logged_in
+                        ?   <Dropdown toggle={this.state.userctrl.togglePanel} openPos={55} closedPos={40} height={'auto'}>
+                            <List>
+                                <li onClick={this.toggleUserCtrlPanel.bind(null, 'LOGOUT')}>
+                                    <Textbox icon={'home'}>Log out</Textbox>
+                                </li>
+                            </List>
+                        </Dropdown>
+                        :   null
+                }
             </div>
         );
     }
@@ -131,6 +140,7 @@ class Topbar extends Component {
 const history = createHashHistory();
 const mapStateToProps = state => ({
     user: state.user,
+    notifications: state.notifications,
     uihelper: state.uihelper
 });
 

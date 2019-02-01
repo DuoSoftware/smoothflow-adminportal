@@ -17,7 +17,7 @@ class ItemCard extends Component {
                 <Link to={{ pathname: '/user/activity/' + this.props.item.activity_name , activity: {...this.props.item}, advanced: true }} className={`sf-item-card sf-border-box sf-item-card-clickable${ this.props.className ? ' ' + this.props.className : null}`}>
                     <div className="sf-item-card-header bordered">
                         <h3>{ this.props.item.name }</h3>
-                        <span className="sf-activity-state">{ this.props.item.review_status }</span>
+                        <span className={`sf-activity-state${' sf-activity-'+this.props.item.review_status.toLowerCase()}`}>{ this.props.item.review_status }</span>
                     </div>
                     <div className="sf-item-card-body">
                         <div className="sf-image-text-container" style={{overflow:'hidden'}}>

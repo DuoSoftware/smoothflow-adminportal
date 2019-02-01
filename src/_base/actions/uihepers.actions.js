@@ -23,3 +23,9 @@ export const CandidateInt = integration => ({
         integration : integration
     }
 });
+
+export const PreloadNotifications = loader => ({
+    category : 'UIHELPER',
+    type : 'PRELOAD_NOTIFICATIONS',
+    loader
+});

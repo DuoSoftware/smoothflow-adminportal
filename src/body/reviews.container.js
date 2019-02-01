@@ -145,41 +145,38 @@ class Reviews extends Component {
                     this.state.loading
                         ?   <Preloader type={'BODY'} />
                         :   <Wrap>
-                            <PageHeader title={'All Activities'}>
-                                <div className="sf-input-inputcontrol sf-flex-1 sf-m-p-r">
-                                    <div className="sf-inputcontrol-select" onClick={ (event) => this.openSearchDropdown(event) }>
-                                        <i className="material-icons">search</i>
-                                        {
-                                            this.state.filter.categories.map((c) => {
-                                                if(c.selected) return <span className={`sf-inputcontrol-state state-${c.text}`} key={c.text}>{ c.text }</span>
-                                            })
-                                        }
-                                        <span className="sf-icon icon-sf_ico_chevron_down"></span>
+                                <PageHeader title={'All Activities'}>
+                                    <div className="sf-input-inputcontrol sf-flex-1 sf-m-p-r">
+                                        <div className="sf-inputcontrol-select" onClick={ (event) => this.openSearchDropdown(event) }>
+                                            <i className="material-icons">search</i>
+                                            {
+                                                this.state.filter.categories.map((c) => {
+                                                    if(c.selected) return <span className={`sf-inputcontrol-state state-${c.text}`} key={c.text}>{ c.text }</span>
+                                                })
+                                            }
+                                            <span className="sf-icon icon-sf_ico_chevron_down"></span>
+                                        </div>
+                                        <div className={`input-dropdown ${this.state.filter.toggleDropdown ? ' input-dropdown-opened' : ''}`}>
+                                            {
+                                                this.state.filter.categories.map((c) => {
+                                                    return  <li onClick={ (e) => this.updatedFilter(e, c.text) } key={c.text}>
+                                                                <span className="sf-list-icon">
+                                                                    { c.selected ? <span className="sf-icon icon-sf_ico_check_circle"></span> : null }
+                                                                </span>
+                                                        <span className={`sf-inputcontrol-state state-${c.text}`}>{ c.text }</span>
+                                                    </li>
+                                                })
+                                            }
+                                        </div>
+                                        <input type="text" id="mainSearch" placeholder="Search.." onChange={ (e) => this.search(e) }/>
                                     </div>
-                                    <div className={`input-dropdown ${this.state.filter.toggleDropdown ? ' input-dropdown-opened' : ''}`}>
-                                        {
-                                            this.state.filter.categories.map((c) => {
-                                                return  <li onClick={ (e) => this.updatedFilter(e, c.text) } key={c.text}>
-                                                            <span className="sf-list-icon">
-                                                                { c.selected ? <span className="sf-icon icon-sf_ico_check_circle"></span> : null }
-                                                            </span>
-                                                    <span className={`sf-inputcontrol-state state-${c.text}`}>{ c.text }</span>
-                                                </li>
-                                            })
-                                        }
-                                    </div>
-                                    <input type="text" id="mainSearch" placeholder="Search.." onChange={ (e) => this.search(e) }/>
-                                </div>
-                                <Link to={'/user/activities/create'} className="sf-button-link">
-                                    <Button className="sf-button sf-button-primary sf-button-primary-p sf-button-raised">Create</Button>
-                                </Link>
-                            </PageHeader>
-                            {
-                                this.state.filtered.map((review) => {
-                                    return <ItemCard item={review} />
-                                })
-                            }
-                        </Wrap>
+                                </PageHeader>
+                                {
+                                    this.state. filtered.map((review) => {
+                                        return <ItemCard item={review} />
+                                    })
+                                }
+                            </Wrap>
                 }
             </div>
         );

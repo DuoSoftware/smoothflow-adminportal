@@ -1,0 +1,16 @@
+@import "../../../core/styles/variables";
+
+.sf-message {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  align-items: center;
+  justify-content: center;
+  color: $sf-color-txt-secondary;
+  .sf-message-text {
+    color: $sf-color-txt-secondary;
+  }
+}
