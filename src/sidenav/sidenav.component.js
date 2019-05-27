@@ -21,6 +21,11 @@ class Sidenav extends Component {
                 url: 'my_reviews',
                 icon: 'code',
                 active: false
+            }, {
+                name: 'Integration Reviews',
+                url: 'integ_reviews',
+                icon: 'code',
+                active: false
             }],
             _create_dd: false
         };

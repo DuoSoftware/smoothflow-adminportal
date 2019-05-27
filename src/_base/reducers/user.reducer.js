@@ -14,7 +14,8 @@ const initState = {
     username: "kasun.w@duosoftware.com",
     _id: "5b62abaeb0eca10001a26ee9",
     is_logged_in: false,
-    reviews: []
+    reviews: [],
+    sesuser: null
 };
 const UserReducer = (state = initState, action) => {
     switch (action.type) {
@@ -27,11 +28,7 @@ const UserReducer = (state = initState, action) => {
         case 'AUTH' :
             return {
                 ...state,
-                username: action.user.username,
-                _id: action.user._id,
-                email: {
-                    contact: action.user.email.contact
-                }
+                sesuser: action.user
             };
 
         case 'SIGNOUT' :

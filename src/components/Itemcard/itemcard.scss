@@ -100,8 +100,10 @@
   &.sf-activity-passed {
     background: $sf-public;
   }
-  &.sf-activity-inprogress {
+  &.sf-activity-inprogress,
+  &.sf-activity-underreview {
     background: $sf-pending;
+    cursor: default;
   }
   &.sf-activity-pendingrevision {
     background: $sf-pending;

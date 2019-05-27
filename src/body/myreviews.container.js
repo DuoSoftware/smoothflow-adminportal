@@ -40,90 +40,176 @@ class MyReviews extends Component {
         this.props.dispatch(PreloadBody(true));
         ReviewsService.getAllReviews()
             .then((res) => {
-                if(typeof(res.data.Result) === "object" && res.data.Result.activities.length > 0) {
-                    const loadedActivities = res.data.Result.activities.map((activity, index) => {
-                        return {
-                            ...activity,
-                            original: activity,
-                            type: 'activity',
-                            state: activity.state,
-                            name: activity.activity_name,
-                            image: activity.image,
-                            description: activity.description,
-                            features:
-                                activity.features.map((ft) => {
-                                    return {
-                                        title: ft.title,
-                                        icon: 'check_circle',
-                                        description: ft.description
-                                    }
-                                }),
-                            tags:
-                                activity.tags.map((tag) => {
-                                    return {
-                                        name: tag.tag
-                                    }
-                                }),
-                            what_you_get:
-                                activity.what_you_get.map((wyg) => {
-                                    return {
-                                        type: 'image',
-                                        file: wyg.file
-                                    }
-                                }),
-                            pricings:
-                                activity.pricings.map((price) => {
-                                    return {
-                                        name: price.name,
-                                        pricing_fts:
-                                            price.pricing_fts.map((ft) => {
+                if (typeof(res.data.Result) === "object" && res.data.Result.activities.length > 0) {
+                    const loadedQueue = {
+                        activities: [],
+                        integrations: []
+                    };
+                    loadedQueue.activities = res.data.Result.activities.filter((activity, index) => {
+                        if(activity.type === 'activity') {
+                            return {
+                                ...activity,
+                                original: activity,
+                                type: activity.type,
+                                state: activity.state,
+                                name: activity.activity_name,
+                                image: activity.image,
+                                description: activity.description,
+                                features:
+                                    activity.features.map((ft) => {
+                                        return {
+                                            title: ft.title,
+                                            icon: 'check_circle',
+                                            description: ft.description
+                                        }
+                                    }),
+                                tags:
+                                    activity.tags.map((tag) => {
+                                        return {
+                                            name: tag.tag
+                                        }
+                                    }),
+                                what_you_get:
+                                    activity.what_you_get.map((wyg) => {
+                                        return {
+                                            type: 'image',
+                                            file: wyg.file
+                                        }
+                                    }),
+                                pricings:
+                                    activity.pricings.map((price) => {
+                                        return {
+                                            name: price.name,
+                                            pricing_fts:
+                                                price.pricing_fts.map((ft) => {
+                                                    return {
+                                                        icon: 'check_circle_thin',
+                                                        text: ft
+                                                    }
+                                                }),
+                                            price: price.price,
+                                            bill_cycle: price.bill_cycle
+                                        }
+                                    }),
+                                faq:
+                                    activity.faq.map((fq) => {
+                                        return  {
+                                            question: fq.question,
+                                            answer: fq.answer
+                                        }
+                                    }),
+                                variables:
+                                    activity.variables.map((v) => {
+                                        return  {
+                                            "Key": v.Key,
+                                            "DisplayName": v.DisplayName,
+                                            "Value": v.Value,
+                                            "ValueList": v.ValueList.map(vl => {
                                                 return {
-                                                    icon: 'check_circle_thin',
-                                                    text: ft
+                                                    "key": vl.key,
+                                                    "value": vl.value
                                                 }
                                             }),
-                                        price: price.price,
-                                        bill_cycle: price.bill_cycle
-                                    }
-                                }),
-                            faq:
-                                activity.faq.map((fq) => {
-                                    return  {
-                                        question: fq.question,
-                                        answer: fq.answer
-                                    }
-                                }),
-                            variables:
-                                activity.variables.map((v) => {
-                                    return  {
-                                        "Key": v.Key,
-                                        "DisplayName": v.DisplayName,
-                                        "Value": v.Value,
-                                        "ValueList": v.ValueList.map(vl => {
-                                            return {
-                                                "key": vl.key,
-                                                "value": vl.value
-                                            }
-                                        }),
-                                        "APIMethod": v.APIMethod,
-                                        "Type": v.Type,
-                                        "Category": v.Category,
-                                        "DataType": v.DataType,
-                                        "Group": v.Group,
-                                        "Priority": v.Priority,
-                                        "advance": v.advance,
-                                        "control": v.control,
-                                        "placeholder": v.placeholder
-                                    }
-                                }),
-                            reviews: []
+                                            "APIMethod": v.APIMethod,
+                                            "Type": v.Type,
+                                            "Category": v.Category,
+                                            "DataType": v.DataType,
+                                            "Group": v.Group,
+                                            "Priority": v.Priority,
+                                            "advance": v.advance,
+                                            "control": v.control,
+                                            "placeholder": v.placeholder
+                                        }
+                                    }),
+                                reviews: []
+                            }
                         }
                     });
-                    this.props.dispatch(MyReviews(loadedActivities));
+                    loadedQueue.integrations = res.data.Result.activities.filter((activity, index) => {
+                        if(activity.type === 'integration') {
+                            return {
+                                ...activity,
+                                original: activity,
+                                type: activity.type,
+                                state: activity.state,
+                                name: activity.activity_name,
+                                image: activity.image,
+                                description: activity.description,
+                                features:
+                                    activity.features.map((ft) => {
+                                        return {
+                                            title: ft.title,
+                                            icon: 'check_circle',
+                                            description: ft.description
+                                        }
+                                    }),
+                                tags:
+                                    activity.tags.map((tag) => {
+                                        return {
+                                            name: tag.tag
+                                        }
+                                    }),
+                                what_you_get:
+                                    activity.what_you_get.map((wyg) => {
+                                        return {
+                                            type: 'image',
+                                            file: wyg.file
+                                        }
+                                    }),
+                                pricings:
+                                    activity.pricings.map((price) => {
+                                        return {
+                                            name: price.name,
+                                            pricing_fts:
+                                                price.pricing_fts.map((ft) => {
+                                                    return {
+                                                        icon: 'check_circle_thin',
+                                                        text: ft
+                                                    }
+                                                }),
+                                            price: price.price,
+                                            bill_cycle: price.bill_cycle
+                                        }
+                                    }),
+                                faq:
+                                    activity.faq.map((fq) => {
+                                        return  {
+                                            question: fq.question,
+                                            answer: fq.answer
+                                        }
+                                    }),
+                                variables:
+                                    activity.variables.map((v) => {
+                                        return  {
+                                            "Key": v.Key,
+                                            "DisplayName": v.DisplayName,
+                                            "Value": v.Value,
+                                            "ValueList": v.ValueList.map(vl => {
+                                                return {
+                                                    "key": vl.key,
+                                                    "value": vl.value
+                                                }
+                                            }),
+                                            "APIMethod": v.APIMethod,
+                                            "Type": v.Type,
+                                            "Category": v.Category,
+                                            "DataType": v.DataType,
+                                            "Group": v.Group,
+                                            "Priority": v.Priority,
+                                            "advance": v.advance,
+                                            "control": v.control,
+                                            "placeholder": v.placeholder
+                                        }
+                                    }),
+                                reviews: []
+                            }
+                        }
+                    });
+                    this.props.dispatch(MyReviews(loadedQueue));
                     this.setState(state => ({
                         ...state,
-                        filtered: loadedActivities,
-                        temp_filtered: loadedActivities
+                        filtered: [loadedQueue.activities, loadedQueue.integrations],
+                        temp_filtered: [loadedQueue.activities, loadedQueue.integrations]
                     }));
                     this.props.dispatch(PreloadBody(false));
                 } else {

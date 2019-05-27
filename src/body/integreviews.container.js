@@ -4,10 +4,10 @@ import { BrowserRouter as Route, Link, Redirect } from "react-router-dom";
 import {Button, PageHeader, Preloader} from "../components/common";
 import ItemCard from '../components/Itemcard/itemcard.widget';
 import {KEY, ReviewsService} from "../_base/services";
-import {ALlReviews} from "../_base/actions";
+import {ALlReviews, IntegrReviews} from "../_base/actions";
 import Wrap from "../_base/_wrap";
 
-class Reviews extends Component {
+class IntegReviews extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -44,45 +44,21 @@ class Reviews extends Component {
             ...state,
             loading: true
         }));
-        ReviewsService.getAllReviews()
+        ReviewsService.getIntegrationReviews()
             .then(reviews => {
                 if (reviews.status) {
                     const _reviews = reviews.data.Result.map(review => {
                         return {
                             ...review,
                             original: review,
-                            type: 'review',
+                            type: 'integration',
                             state: review.review_status,
-                            name: review.activity_name ? review.activity_name : review.integration_name ? review.integration_name : null,
-                            image: review.image,
+                            name: review.integration_name,
                             description: review.description,
-                            variables:
-                                review.variables.map((v) => {
-                                    return  {
-                                        "Key": v.Key,
-                                        "DisplayName": v.DisplayName,
-                                        "Value": v.Value,
-                                        "ValueList": v.ValueList.map(vl => {
-                                            return {
-                                                "key": vl.key,
-                                                "value": vl.value
-                                            }
-                                        }),
-                                        "APIMethod": v.APIMethod,
-                                        "Type": v.Type,
-                                        "Category": v.Category,
-                                        "DataType": v.DataType,
-                                        "Group": v.Group,
-                                        "Priority": v.Priority,
-                                        "advance": v.advance,
-                                        "control": v.control,
-                                        "placeholder": v.placeholder
-                                    }
-                                }),
-                            reviews: []
+                            _id: review.path
                         }
                     });
-                    this.props.dispatch(ALlReviews(_reviews));
+                    this.props.dispatch(IntegrReviews(_reviews));
                     this.setState(state => ({
                         ...state,
                         loading: false,
@@ -145,38 +121,38 @@ class Reviews extends Component {
                     this.state.loading
                         ?   <Preloader type={'BODY'} />
                         :   <Wrap>
-                                <PageHeader title={'All Activities'}>
-                                    <div className="sf-input-inputcontrol sf-flex-1 sf-m-p-r">
-                                        <div className="sf-inputcontrol-select" onClick={ (event) => this.openSearchDropdown(event) }>
-                                            <i className="material-icons">search</i>
-                                            {
-                                                this.state.filter.categories.map((c) => {
-                                                    if(c.selected) return <span className={`sf-inputcontrol-state state-${c.text}`} key={c.text}>{ c.text }</span>
-                                                })
-                                            }
-                                            <span className="sf-icon icon-sf_ico_chevron_down"></span>
-                                        </div>
-                                        <div className={`input-dropdown ${this.state.filter.toggleDropdown ? ' input-dropdown-opened' : ''}`}>
-                                            {
-                                                this.state.filter.categories.map((c) => {
-                                                    return  <li onClick={ (e) => this.updatedFilter(e, c.text) } key={c.text}>
+                            <PageHeader title={'All Activities'}>
+                                <div className="sf-input-inputcontrol sf-flex-1 sf-m-p-r">
+                                    <div className="sf-inputcontrol-select" onClick={ (event) => this.openSearchDropdown(event) }>
+                                        <i className="material-icons">search</i>
+                                        {
+                                            this.state.filter.categories.map((c) => {
+                                                if(c.selected) return <span className={`sf-inputcontrol-state state-${c.text}`} key={c.text}>{ c.text }</span>
+                                            })
+                                        }
+                                        <span className="sf-icon icon-sf_ico_chevron_down"></span>
+                                    </div>
+                                    <div className={`input-dropdown ${this.state.filter.toggleDropdown ? ' input-dropdown-opened' : ''}`}>
+                                        {
+                                            this.state.filter.categories.map((c) => {
+                                                return  <li onClick={ (e) => this.updatedFilter(e, c.text) } key={c.text}>
                                                                 <span className="sf-list-icon">
                                                                     { c.selected ? <span className="sf-icon icon-sf_ico_check_circle"></span> : null }
                                                                 </span>
-                                                        <span className={`sf-inputcontrol-state state-${c.text}`}>{ c.text }</span>
-                                                    </li>
-                                                })
-                                            }
-                                        </div>
-                                        <input type="text" id="mainSearch" placeholder="Search.." onChange={ (e) => this.search(e) }/>
+                                                    <span className={`sf-inputcontrol-state state-${c.text}`}>{ c.text }</span>
+                                                </li>
+                                            })
+                                        }
                                     </div>
-                                </PageHeader>
-                                {
-                                    this.state.filtered.map((review) =>
-                                        <ItemCard key={KEY()} item={review} />
-                                    )
-                                }
-                            </Wrap>
+                                    <input type="text" id="mainSearch" placeholder="Search.." onChange={ (e) => this.search(e) }/>
+                                </div>
+                            </PageHeader>
+                            {
+                                this.state.filtered.map((review) =>
+                                    <ItemCard key={KEY()} item={review} />
+                                )
+                            }
+                        </Wrap>
                 }
             </div>
         );
@@ -189,4 +165,4 @@ const mapStateToProps = (state => ({
     user : state.user
 }));
 
-export default connect(mapStateToProps)(Reviews);
+export default connect(mapStateToProps)(IntegReviews);

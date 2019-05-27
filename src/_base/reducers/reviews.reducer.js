@@ -1,5 +1,6 @@
 const initState = {
-    reviews: []
+    reviews: [],
+    integ_reviews: []
 };
 const ReviewsReducer = (state = initState, action) => {
     switch (action.type) {
@@ -8,6 +9,12 @@ const ReviewsReducer = (state = initState, action) => {
             return {
                 ...state,
                 reviews: action.reviews
+            };
+
+        case 'INTEG_REVIEWS' :
+            return {
+                ...state,
+                integ_reviews: action.reviews
             };
 
         default:

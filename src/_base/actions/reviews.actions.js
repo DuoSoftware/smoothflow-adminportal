@@ -10,4 +10,10 @@ export const ALlReviews = reviews => ({
     reviews
 });
 
+export const IntegrReviews = reviews => ({
+    category: 'REVIEWS',
+    type: 'INTEG_REVIEWS',
+    reviews
+});
+
 

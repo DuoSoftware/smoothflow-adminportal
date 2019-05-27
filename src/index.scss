@@ -1,7 +1,7 @@
 @import "./core/styles/variables";
 @import "./core/icons/icons.css";
-@import '../node_modules/react-redux-toastr/src/styles/index';
 @import '../node_modules/react-quill/dist/quill.snow.css';
+@import '../node_modules/react-redux-toastr/src/styles/index';
 
 body,
 html,
@@ -656,7 +656,7 @@ form {
   //padding: 0 $sf-padding-secondary;
   margin-bottom: $sf-padding-primary;
   display: flex;
-  &.sf-comment-failed {
+  &.sf-comment-pendingrevision {
     .sf-comment-block-prefix {
       background: $sf-failed;
     }
@@ -667,10 +667,13 @@ form {
     }
   }
   .sf-comment-block-prefix {
-    padding: $sf-padding-secondary;
+    padding: ($sf-padding-primary - 3) $sf-padding-third;
     border-radius: $sf-border-radius-primary 0 0 $sf-border-radius-primary;
     //background: red;
     color: #ffffff;
+    .material-icons {
+      font-size: 20px;
+    }
   }
   .sf-comment-block-body {
     flex: 1;
@@ -680,9 +683,9 @@ form {
       display: flex;
       padding: $sf-padding-secondary;
       align-items: center;
-      font-weight: 500;
+      font-weight: normal;
       .material-icons {
-        font-size: 25px;
+        font-size: 22px;
         color: #dddddd;
         margin-right: $sf-padding-third;
       }
@@ -691,13 +694,40 @@ form {
       padding: $sf-padding-secondary;
       margin: 0;
       color: $sf-text-color-secondary;
+      p {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.sf-add-review-block {
+  border-radius: 5px;
+  box-shadow: 0 1px $sf-shadow-size-secondary $sf-shadow-color-primary;
+  .sf-add-review-header {
+    display: flex;
+    align-items: center;
+    padding: $sf-padding-secondary;
+    background: $sf-color-bg-secondary;
+    h3 {
+      flex: 1;
+    }
+    .sf-custom-select {
+      padding: 0;
+      select {
+        padding: 3px 5px;
+        width: 250px;
+      }
+      &:before {
+        top: 14px;
+      }
     }
   }
 }
 
 .quill {
-  border-radius: $sf-border-radius-primary;
-  box-shadow: 0 1px $sf-shadow-size-secondary $sf-shadow-color-primary;
+  //border-radius: $sf-border-radius-primary;
+  //box-shadow: 0 1px $sf-shadow-size-secondary $sf-shadow-color-primary;
   .ql-toolbar.ql-snow,
   .ql-container.ql-snow {
     border: none;

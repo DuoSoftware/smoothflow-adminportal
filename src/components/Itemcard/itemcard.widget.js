@@ -14,7 +14,7 @@ class ItemCard extends Component {
     render() {
         return (
             <div className="sf-item-card-wrap" {...this.props}>
-                <Link to={{ pathname: '/user/activity/' + this.props.item.activity_name , activity: {...this.props.item}, advanced: true }} className={`sf-item-card sf-border-box sf-item-card-clickable${ this.props.className ? ' ' + this.props.className : null}`}>
+                <Link to={ this.props.item.review_status === 'UNDERREVIEW' && !this.props.item.scope === this.props.user.username ? {} : { pathname: '/user/activity/' + this.props.item.activity_name , activity: {...this.props.item}, advanced: true } } className={`sf-item-card sf-border-box sf-item-card-clickable${ this.props.className ? ' ' + this.props.className : null}`}>
                     <div className="sf-item-card-header bordered">
                         <h3>{ this.props.item.name }</h3>
                         <span className={`sf-activity-state${' sf-activity-'+this.props.item.review_status.toLowerCase()}`}>{ this.props.item.review_status }</span>

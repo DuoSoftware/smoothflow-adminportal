@@ -4,7 +4,13 @@ import fs from 'fs';
 
 const ReviewsService = {
     getAllReviews: () => {
-        return axios.get(URLs.base + URLs.reviews.getReviewQueues)
+        return axios.get(URLs.reviews.integrations.base_ + URLs.reviews.integrations.marketplaceIntegrationReviews)
+    },
+    getIntegrationReviews: () => {
+        return axios.get(URLs.reviews.integrations.base_ + URLs.reviews.integrations.marketplaceIntegrationReviews)
+    },
+    getIntegrationById: (id) => {
+        return axios.get(URLs.reviews.integrations.getIntegrationById + id)
     },
     addComment: (comment, user) => {
         return axios({
@@ -20,8 +26,27 @@ const ReviewsService = {
             return erres;
         });
     },
-    publishActivity: (file, lang, callback) => {
-
+    directPublish: (file, lang, callback) => {
+        return axios.post(URLs.reviews.integrations.updateIntegration, file)
+    },
+    downloadActivity: (filename) => {
+        return axios({
+            method: 'POST',
+            baseUrl: URLs.media.base,
+            url: URLs.media.base + URLs.media.download,
+            data: {
+                "fileName" : filename
+            }
+        })
+        .then(res => {
+            return res;
+        })
+        .catch(errres => {
+            return errres;
+        })
+    },
+    updateReviewQueue: (id, payload) => {
+        return axios.put(URLs.reviews.updateReviewQueueItem + '/' + id, payload);
     }
 };
 

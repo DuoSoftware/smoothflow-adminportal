@@ -1,0 +1,28 @@
+{
+  "Auth": {
+
+    "identityPoolId": "us-east-1:afec1095-ed36-4cc2-8f5b-ef6c37528c94",
+
+    "region": "us-east-1",
+
+    "identityPoolRegion": "us-east-1",
+
+    "userPoolId": "us-east-1_vhcdWMTaV",
+
+    "userPoolWebClientId": "7h0k235kelpooui6etj31mcntr",
+
+    "mandatorySignIn": false,
+
+    "appWebDomain": "smoothflow-prod.auth.us-east-1.amazoncognito.com",
+
+    "authenticationFlowType": "USER_PASSWORD_AUTH"
+  },
+  "API": {
+
+    "endpoints" : [{
+      "name" : "GetAllBots",
+      "endpoint" : "https://smoothbotservices.plus.smoothflow.io/DBF/API/1.0.0.0/BotService/Bots/"
+    }]
+
+  }
+}

@@ -11,6 +11,7 @@ import Topbar from './topbar/topbar.component';
 import Home from './body/home.container';
 import ItemView from './body/itemview.container';
 import Reviews from './body/reviews.container';
+import IntegReviews from './body/integreviews.container';
 import PrivateRoute from './_base/_private.route';
 import URLs from "./_base/_urls";
 import {User, PreloadShell, SignIn, Tokens, InjectNotification} from './_base/actions';
@@ -21,41 +22,50 @@ import config from './config'
 import { CognitoUserPool, CookieStorage } from 'amazon-cognito-identity-js'
 import {Preloader, Notification} from "./components/common";
 import {Message} from "./components/common/Message/message";
-
+import { toastr } from 'react-redux-toastr';
+import Amplify from 'aws-amplify';
 
 class App extends Component {
     constructor(props) {
         super(props)
     };
     componentDidMount() {
-        const _token = localStorage.getItem('satellizer_token');
-        if(_token) {
-            this.props.dispatch(SignIn(true));
-            this.props.dispatch(PreloadShell(true));
-            UserService.getUserProfile()
-                .then(profile => {
-                    if(profile.data.IsSuccess){
-                        const _tokenParsed = UIHelper.parseJWT(localStorage.getItem('satellizer_token'));
-                        const company = _tokenParsed.companyName;
-                        const host = 'dev.smoothflow.io';//window.location.host;
-                        UserService.getUserSettings(URLs.auth.getUserSettings(host, company))
-                            .then((settings) => {
-                                profile.data.Result.settings = settings.data.Result;
-                                this.props.dispatch(PreloadShell(false));
-                                this.props.dispatch(User(profile.data.Result));
-                            })
-                            .catch(_errorRes => {
-                                console.log(_errorRes)
-                                this.props.dispatch(PreloadShell(false));
-                                this.props.dispatch(User(profile.data.Result));
-                            });
-                    }
-                })
-                .catch(errorRes => {
-                    console.log(errorRes)
-                    this.props.dispatch(PreloadShell(false));
-                });
-        }
+        Amplify.Auth.currentSession()
+            .then(_ses => {
+                this.props.dispatch(PreloadShell(true));
+                const _sesuser = _ses.idToken.payload;
+                UserService.getUserProfile()
+                    .then(profile => {
+                        if (profile.data.IsSuccess) {
+                            profile.data.Result.given_name = _sesuser.given_name;
+                            profile.data.Result.family_name = _sesuser.family_name;
+                            this.props.dispatch(PreloadShell(false));
+                            this.props.dispatch(User(profile.data.Result));
+                            this.props.dispatch(SignIn(true));
+
+                            // const company = _ses.idToken.jwtToken;
+                            // const host = 'dev.smoothflow.io';   //window.location.host;
+                            //
+                            // UserService.getUserSettings(URLs.auth.getUserSettings(host, company))
+                            //     .then((settings) => {
+                            //         profile.data.Result.settings = settings.data.Result;
+                            //         this.props.dispatch(PreloadShell(false));
+                            //         this.props.dispatch(User(profile.data.Result));
+                            //     })
+                            //     .catch(_errorRes => {
+                            //         this.props.dispatch(PreloadShell(false));
+                            //         this.props.dispatch(User(profile.data.Result));
+                            //     });
+
+                        }
+                    })
+                    .catch(errorRes => {
+                        this.props.dispatch(PreloadShell(false));
+                    });
+            })
+            .catch(eres => {
+                debugger
+            })
 
         /* AWS - IoT
         ================================================================== */
@@ -81,7 +91,7 @@ class App extends Component {
             })
         });
         function getLoginKey() {
-            debugger
+            // debugger
             const session = null;
             if(userPool) {
                 const currentUser = userPool.getCurrentUser();
@@ -97,7 +107,7 @@ class App extends Component {
         AWS.config.region = config.awsRegion;
 
         const session = getLoginKey();
-        debugger
+        // debugger
         const loginKey = `cognito-idp.${config.awsRegion}.amazonaws.com/${config.cognito.awsCognitoUserPoolId}`;
         login[loginKey] = session;
 
@@ -105,7 +115,7 @@ class App extends Component {
             IdentityPoolId: config.cognito.awsCognitoIdentityPoolId,
             Logins: login
         });
-        debugger
+        // debugger
 
         AWS.config.credentials.refresh((error) => {
             if (error) {
@@ -129,7 +139,7 @@ class App extends Component {
                 // const gIotClient = this.props.notifications.global_notif_connection;
 
                 iotClient.onConnect(function () {
-                    debugger;
+                    // debugger;
                     console.log('connected.');
                     iotClient.subscribe('forms/5c33520cd07f814355190371');
                     // iotClient.publish('other/bina', "{'message':'Formss'}");
@@ -138,9 +148,10 @@ class App extends Component {
                     // debugger;
                 });
                 iotClient.onMessageReceived(function(topic, message) {
-                    debugger
+                    // debugger
                     console.log(topic, message);
                     _self.props.dispatch(InjectNotification(message));
+                    toastr.info('New notification', 'You have recieved a new notification');
                 });
                 /* --------------------------------------------------------------- */
             }
@@ -178,7 +189,9 @@ class App extends Component {
                                         <Switch location={location}>
                                             <Route exact path="/" component={Home} />
                                             <Route exact path="/user/all_reviews" component={Reviews} />
+                                            <Route exact path="/user/integ_reviews" component={IntegReviews} />
                                             <Route path="/user/activity/:id" component={ItemView} />
+                                            <Route path="/user/integ_reviews/:id" component={ItemView} />
 \                                            <PrivateRoute exact path="/user/reviews" is_logged_in={this.props.user.is_logged_in} component={MyReviews} />
                                         </Switch>
                                     </CSSTransition>
