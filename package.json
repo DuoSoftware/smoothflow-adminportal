@@ -6,7 +6,7 @@
     "amazon-cognito-identity-js": "^3.0.6",
     "autoprefixer": "7.1.6",
     "aws-iot-device-sdk": "^2.2.1",
-    "aws-sdk": "^2.384.0",
+    "aws-sdk": "^2.814.0",
     "aws-amplify": "^1.1.26",
     "axios": "^0.18.0",
     "axios-jsonp": "^1.0.2",
